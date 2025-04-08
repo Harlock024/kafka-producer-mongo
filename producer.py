@@ -47,7 +47,7 @@ def trigger_producer():
         for index, row in df.head(100).iterrows():
             data_dict = row.to_dict()
             future = producer.send(
-                "spotify_mongo",
+                'spotify_mongo',
                 key=hostname,
                 value=data_dict
             )
