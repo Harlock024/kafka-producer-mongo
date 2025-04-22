@@ -39,7 +39,7 @@ def on_error(e):
 
 DATA_JSON_URL = "https://raw.githubusercontent.com/Harlock024/stream_kafka_p/refs/heads/master/results/data.json"
 
-@app.route('/trigger-producer', methods=['POST'])
+@app.route('/trigger-producer', methods=['GET'])
 def trigger_producer():
     try:
         df = pd.read_json(DATA_JSON_URL, orient="columns")
@@ -54,7 +54,6 @@ def trigger_producer():
             future.add_callback(on_success)
             future.add_errback(on_error)
 
-
         producer.flush()
         producer.close()
 
@@ -66,4 +65,4 @@ def trigger_producer():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)
